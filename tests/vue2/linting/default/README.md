@@ -2,6 +2,16 @@
 
 Vue 2 linting demo
 
+## Highlights
+
+* Single Quotes mandatory
+* Line length limit: 120
+* No comma dangle
+* Tab width: 2
+* Enforcing errors for some rules, when buidling for production use.
+
+---
+
 ## Project setup
 ```
 npm install
