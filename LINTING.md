@@ -1,3 +1,16 @@
+# Linting
+
+## ESLint
+
+npm packages needed:
+
+```
+npm i -D eslint prettier @prettier/plugin-pug @vue/eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue
+```
+
+```js
+// .eslintrc.js
+
 module.exports = {
   root: true,
   env: {
@@ -13,7 +26,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'no-unused-vars': 'warn',
 
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
     'comma-dangle': ['error', 'never'],
@@ -37,3 +50,22 @@ module.exports = {
     }
   ]
 }
+```
+
+Prettier Configuration
+
+```js
+// prettierrc.js
+ module.exports = {
+  trailingComma: 'none',
+  tabWidth: 2,
+  semi: false,
+  singleQuote: true,
+  pugSingleQuote: false,
+  printWidth: 120,
+  arrowParens: 'avoid'
+}
+```
+
+## Optional
+Vetur - Vue tooling for VS Code. https://marketplace.visualstudio.com/items?itemName=octref.vetur
