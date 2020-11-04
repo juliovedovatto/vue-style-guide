@@ -12,6 +12,7 @@ Nowadays, makes more sense do use SFC structure (https://vuejs.org/v2/guide/sing
 <script>
 export default {
   name: 'HelloWorld',
+  components: {} // children components
   props: {}, // component properties, immutable
   data() { return {} }, // data properties, mutable
   computed() {}, // dinamic properties, reactive
@@ -43,7 +44,8 @@ export default {
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
+  components: {} // children components
   props: {}, // component properties, immutable
   data() { return {} }, // data properties, mutable
   computed() {}, // dinamic properties, reactive
