@@ -150,7 +150,7 @@ export default {
 
 **Single File Component (.vue)**
 
-* Follow Vue suggested order (template/script/style).
+* Follow Vue suggested  tags ordering (template/script/style).
 
 ```html
 <!-- bad -->
@@ -183,3 +183,44 @@ export default {
 </style>
 ```
 
+**Import Order**
+
+* For a better readibility, it is recommended to group in the following order for SFC components (`.vue`).
+
+```js
+// npm packages
+import Vue from 'vue'
+import { merge } from 'lodash'
+
+// helper/general methods
+import sortStatuses from '@/some/folder/file'
+import Alert from '@/some/folder/file'
+
+// Data Types / General Objects
+import UserType from '@/some/folder/model/file'
+import { DEFAULT_EMAIL } from '@/some/folder/model/file'
+
+// Vue Components
+import StatusDropdown from '@/components/some/folder/file'
+
+// assets
+import Logo from '@/assets/logo.svg'
+
+// global variables / contants
+const offset = 30
+const DEFAULT_SIZE = 30
+```
+
+* For pure JS files, it is recommended to sort imports alphabetically. There is an exellent [VSCode plugin](https://marketplace.visualstudio.com/items?itemName=amatiasq.sort-imports) to help this.
+
+```js
+// bad
+import Vue from 'vue'
+import { merge, each } from 'lodash'
+
+
+// good
+import { each, merge } from 'lodash'
+
+import Vue from 'vue'
+```
