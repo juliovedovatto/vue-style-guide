@@ -82,6 +82,10 @@
 </template>
 
 <script>
+import { merge, each } from 'lodash'
+
+import HelloWorld1 from '@/components/HelloWorldPug.vue'
+
 export default {
   name: "HelloWorld",
   props: {

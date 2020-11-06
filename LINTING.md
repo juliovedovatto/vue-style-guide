@@ -30,6 +30,8 @@ module.exports = {
 
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
     'comma-dangle': ['error', 'never'],
+    'sort-imports': ['error'],
+
 
     // Vue specific
     'vue/require-prop-type-constructor': 'error',
