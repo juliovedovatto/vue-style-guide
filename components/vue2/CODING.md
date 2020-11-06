@@ -37,11 +37,22 @@ export default {
 <example-component my-prop="prop" />
 ```
 
-**Quotes**
+**Methods**/
+
+* For events, use `handle` prefix.
+  * Example: `handleClick`, `handleUser`, `handleSubmit`,.
+* For boolean methods, prefix with basic **auxiliar verbs** or **modal verbs**: `is`, `are`, `have`, `has`, `had`, `was`, `were`, `can`, etc
+  * Example: `isActive`, `canAccessAdmin`, `hasAdminStatus`.
+  * Try to stick with the basic naming when prefixing with these verbs.
+* For methods, use imperative grammar, with the intent explicit in the name. So others users can easily understand what the methods do just looking at the name.
+  * Example: `saveUser`, `changeStatus`, `doLogin`
+
+
+### Quotes
 
 **Always use** double quotes `"` inside templates and single quotes `'` for all other JS.
 
-**Props definition**
+### Props definition
 
 * Props **must be** declared as an object.
 * For important props, use `required: true`.
@@ -96,10 +107,13 @@ export default {
 }
 ```
 
-**Data**
+### Data
 
 * Data property should always be a function that returns an object with available mutating variables.
 * Case you need to mutate something that came from a `prop` declaration, create a data variable to clone property data (by value).
+* Props must be in **camelCase**.
+* Try to order props alphabetically
+* Avoid setting data using external variables/imports. This is **bad** practice.
 
 
 ```js
@@ -108,7 +122,10 @@ export default {
   name: 'ExampleComponent',
   // ...
   data: {
-    foo: 'bar'
+    name: '',
+    lastName: '',
+    foo: 'bar',
+    emailRegex: emailValidator // bad: setting prop using external variable/import
   }
 }
 ```
@@ -120,9 +137,49 @@ export default {
   // ...
   data() {
     return {
-      foo: 'bar'
+      foo: 'bar',
+      lastName: '',
+      name: ''
     }
   }
   // ...
 }
 ```
+
+### Ordering
+
+**Single File Component (.vue)**
+
+* Follow Vue suggested order (template/script/style).
+
+```html
+<!-- bad -->
+<script [lang]>
+  //...
+</script>
+
+<template [lang]>
+  <!-- -->
+</template>
+
+<style [lang][scoped]>
+  /*...*/
+</style>
+```
+
+```html
+<!-- good -->
+<template [lang]>
+  // ...
+</template>
+
+<script [lang]>
+  // ...
+</script>
+
+// We don't use scoped styles but there are few instances of this
+<style [lang][scoped]>
+  // ...
+</style>
+```
+
