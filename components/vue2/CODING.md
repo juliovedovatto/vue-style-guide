@@ -407,7 +407,7 @@ This will help headbility and write less.
 // good
 <template>
   <div class="foo">
-    <foo @:click="handleClick" />
+    <foo @click="handleClick" />
   </div>
 </template>
 ```
@@ -422,24 +422,39 @@ This will help headbility and write less.
 </template>
 ```
 
+**Events: use colon `(:)` to keep event naming separated, case is using multiple words**
+
+Avoid using `kebad-case` events.
+
+```html
+<template>
+  <div class="foo">
+    <foo @project:update="handleSaveInfo" />
+  </div>
+</template>
+```
+
+
 **Events: use concise event names for custom events**
 
 ```html
 <template>
   <div class="foo">
-    <foo @save-info="handleSaveInfo" />
+    <foo @save:info="handleSaveInfo" />
   </div>
 </template>
 ```
 
 **Events: for native DOM events, always use `.prevent` event modifier.**
 
-Even if there is no need, it is good to use to avoid side-effects
+Even if there is no need, it is good to use to avoid side-effects.
+
+Example: `click`, `submit`
 
 ```html
 <template>
   <div class="foo">
-    <foo @click.prevent="handleSaveInfo" />
+    <button @click.prevent="handleSaveInfo">Save</button>
   </div>
 </template>
 ```
