@@ -424,23 +424,53 @@ This will help headbility and write less.
 
 **Events: use colon `(:)` to keep event naming separated, case is using multiple words**
 
-Avoid using `kebad-case` events.
+* Avoid using `kebad-case` events.
+* Max 3 words per event.
 
 ```html
+<!-- good -->
 <template>
   <div class="foo">
     <foo @project:update="handleSaveInfo" />
   </div>
 </template>
-```
 
+<!-- good -->
+<template>
+  <div class="foo">
+    <foo @project:note-add="handleSaveInfo" />
+  </div>
+</template>
+
+<!-- good -->
+<template>
+  <div class="foo">
+    <foo @project:notes:add="handleSaveInfo" />
+  </div>
+</template>
+
+<!-- bad -->
+<template>
+  <div class="foo">
+    <foo @project:notes:user:add="handleSaveInfo" />
+  </div>
+</template>
+```
 
 **Events: use concise event names for custom events**
 
 ```html
+<!-- good -->
 <template>
   <div class="foo">
     <foo @save:info="handleSaveInfo" />
+  </div>
+</template>
+
+<-- bad -->
+<template>
+  <div class="foo">
+    <foo @handle:save="handleSaveInfo" />
   </div>
 </template>
 ```
