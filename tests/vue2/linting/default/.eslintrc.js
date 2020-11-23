@@ -10,6 +10,7 @@ module.exports = {
     'plugin:vue/recommended',
     '@vue/prettier'
   ],
+  plugins: ['sort-exports'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -18,6 +19,10 @@ module.exports = {
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
     'comma-dangle': ['error', 'never'],
     'sort-imports': ['error'],
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+
+    // custom rules
+    'sort-exports/sort-exports': ['error', { sortDir: 'asc' }],
 
     // Vue specific
     'vue/require-prop-type-constructor': 'error',
@@ -25,6 +30,7 @@ module.exports = {
     'vue/prop-name-casing': 'error',
     'vue/no-mutating-props': 'error',
     'vue/order-in-components': 'error',
+    'vue/custom-event-name-casing': ['error', { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*(:[a-z]+(?:-[a-z]+)*)?$/u'] }]
   },
   parserOptions: {
     parser: 'babel-eslint'
