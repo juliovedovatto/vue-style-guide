@@ -4,6 +4,32 @@
 
 Nowadays, makes more sense do use SFC structure (https://vuejs.org/v2/guide/single-file-components.html) instead *old school* Vue component syntax.
 
+## Naming
+
+* **Concise:** not over specific, not overly abstract.
+* Short: 1 to 3 words.
+* Pronounceable: we want to be able to talk about them.
+* Avoid naming using html tags.
+  * Bad: `<form :data="data" />`
+  * Good: `<user-form :data="data" />`
+* Component name should be in `PascalCase`.
+* File name and component name needs to have the same name. This will help find it easily.
+
+### Ordering
+
+Follow default Vue recommendation.
+
+```html
+<template>
+</template>
+
+<script>
+</script>
+
+<style scoped>
+</style>
+```
+
 ```html
 <template>
 <!-- templating goes here -->
@@ -11,7 +37,7 @@ Nowadays, makes more sense do use SFC structure (https://vuejs.org/v2/guide/sing
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'HelloWorld', // name property is mandatory
   components: {} // children components
   props: {}, // component properties, immutable
   data() { return {} }, // data properties, mutable
@@ -67,3 +93,17 @@ export default {
 </style>
 
 ```
+
+### Module based development
+
+*text adapted from: https://github.com/pablohpsilva/vuejs-component-style-guide*
+
+* Always build your app out of small modules which do one thing and do it well.
+* A module is a small self-contained part of an application. The Vue.js library is specifically designed to help you create `view-logic` modules.
+* Small modules are easier to learn, understand, maintain, reuse and debug. Both by you and other developers.
+* Each Vue component (like any module) must be `FIRST`: **Focused** (single responsibility), **Independent**, **Reusable**, **Small** and **Testable**.
+* If your component does too much or gets too big, split it up into smaller components which each do just **one thing**.
+* Try to keep each component file less than 100 lines of code.
+* Ensure your Vue component works in isolation. This will help to improve `DRY` (Don't repeat yourself).
+
+
