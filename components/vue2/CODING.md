@@ -54,6 +54,7 @@ export default {
 
 ### Props definition
 
+* Naming must be **consise**, since it will act as properties when  binding data from templates.
 * Props **must be** declared as an object.
 * For important props, use `required: true`.
 * Default key should be provided if the prop is not required. **Always assume a default value**, to help checkings and avoid side-effects.
