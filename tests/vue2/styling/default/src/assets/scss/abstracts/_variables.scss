@@ -1,0 +1,29 @@
+@use "sass:color";
+
+// COLOR PALETTE
+$color-white: #fff;
+
+$color-primary: #5077cc;
+$color-secondary: #d3e4dc;
+
+$color-primary-light: color.scale($color-primary, $lightness: 20%);
+$color-primary-lighter: color.scale($color-primary, $lightness: 40%);
+$color-primary-lightest: color.scale($color-primary, $lightness: 60%);
+$color-secondary-light: color.scale($color-secondary, $lightness: 20%);
+$color-secondary-lighter: color.scale($color-secondary, $lightness: 40%);
+$color-secondary-lightest: color.scale($color-secondary, $lightness: 60%);
+
+$color-primary-dark: color.scale($color-primary, $lightness: -20%);
+$color-primary-darker: color.scale($color-primary, $lightness: -40%);
+$color-primary-darkest: color.scale($color-primary, $lightness: -60%);
+$color-secondary-dark: color.scale($color-secondary, $lightness: -20%);
+$color-secondary-darker: color.scale($color-secondary, $lightness: -40%);
+$color-secondary-darkest: color.scale($color-secondary, $lightness: -60%);
+
+// TYPOGRAPHY
+$font-default: Roboto, sans-serif;
+$font-size-default: 1rem;
+$font-small-sizes: ("small": 75%, "smaller": 50%, "smallest": 25%);
+
+// SIZING
+$width-relative-sizes: (25%, 50%, 75%, 100%) !default;

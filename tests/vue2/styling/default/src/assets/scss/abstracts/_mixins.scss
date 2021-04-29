@@ -1,0 +1,41 @@
+// a BEM element() mixin--as has been seen elsewhere
+@mixin element($name) {
+  @at-root {
+    #{&}__#{$name} {
+      @content;
+    }
+  }
+}
+
+// the BEM modifier() mixin
+@mixin modifier($name) {
+  @at-root {
+    $selector: nth(&, 1);
+    $direct-parent: nth($selector, length($selector));
+
+    #{$direct-parent}--#{$name} {
+      @extend #{$direct-parent};
+    }
+
+    #{&}--#{$name} {
+      @content;
+    }
+  }
+}
+
+// BEM shortcuts
+@mixin e($name) {
+  @at-root {
+    @include element($name) {
+      @content;
+    }
+  }
+}
+
+@mixin m($name) {
+  @at-root {
+    @include modifier($name) {
+      @content;
+    }
+  }
+}

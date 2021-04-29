@@ -1,0 +1,37 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+html, body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: variables.$font-default;
+  font-size: variables.$font-size-default;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.button {
+  padding: 0.5em;
+  border-radius: 0.50rem;
+  appearance: none;
+
+  @include mixins.modifier('good') {
+    background-color: variables.$color-primary;
+    color: variables.$color-white;
+    border-color: #fff;
+  }
+
+  @include mixins.modifier('bad') {
+    background-color: #d35d5d;
+    color: variables.$color-white;
+  }
+  @include mixins.e('icon') {
+    margin-left: 1em;
+    @include mixins.m('good') {
+      color: white;
+    }
+    @include mixins.m('bad') {
+      color: white;
+    }
+  }
+}

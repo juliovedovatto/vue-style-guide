@@ -1,0 +1,8 @@
+input:required,
+input:invalid {
+  box-shadow: none;
+}
+
+*:focus {
+  outline: none;
+}

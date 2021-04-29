@@ -1,0 +1,36 @@
+@use '../abstracts/variables';
+@use '../abstracts/functions';
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.disabled,
+[disabled]
+{
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@each $alignment in (left, right, center, justify) {
+  .text-#{$alignment} {
+    text-align: $alignment !important;
+  }
+}
+
+@each $size in variables.$width-relative-sizes {
+  .w-#{functions.strip-unit($size)} {
+    width: $size !important;
+  }
+}
+
+@each $name, $size in variables.$font-small-sizes {
+  .font-#{$name} {
+    font-size: $size;
+  }
+}

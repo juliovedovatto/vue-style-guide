@@ -1,0 +1,22 @@
+@use '../abstracts/variables';
+
+// define colors here case you need to export to JS
+:export {
+  colorPrimary: variables.$color-primary;
+  colorSecondary: variables.$color-secondary;
+
+  colorPrimaryLight: variables.$color-primary-light;
+  colorPrimaryLighter: variables.$color-primary-lighter;
+  colorPrimaryLightest: variables.$color-primary-lighter;
+
+  colorSecondaryLight: variables.$color-secondary-light;
+  colorSecondaryLighter: variables.$color-secondary-lighter;
+  colorSecondaryLightest: variables.$color-secondary-lighter;
+
+  colorPrimaryDark: variables.$color-primary-dark;
+  colorPrimaryDark: variables.$color-primary-darker;
+  colorPrimaryDark: variables.$color-primary-darkest;
+  colorSecondaryDark: variables.$color-secondary-dark;
+  colorSecondaryDarker: variables.$color-secondary-darker;
+  colorSecondaryDarkest: variables.$color-secondary-darkest;
+}
