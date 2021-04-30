@@ -88,13 +88,76 @@ export default {
 }
 ```
 
+**Important Note:** `mutations` methods **must be** synchronous, while `actions` methods can be asynchronous.
+
+### Vuex in Components
+
+* Do not call a `mutation` **directly**. Always create an `action`, to commit a mutation. It will keep consistency throughout the application.
+* Using `mapState` is strongly disengouraged.
+* Don't access `state` directly, use `getters` instead. Getters allows to create custom functions, case needs to retrieve a particular value.
+* Use `mapGetters` to map state data to computed properties - https://vuex.vuejs.org/guide/getters.html
+
+
+```html
+<template>
+  <div class="user-details">
+    <span>Hello, {{ name }} 👋🏻</span>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'UserDetails',
+  // ...
+  computed: {
+    ...mapGetters('user', ['info']), // we are mapping "info" getter to a computed property with the same name.
+    name() {
+      return this.info?.name || 'Guest'
+    }
+  },
+  //...
+}
+</script>
+
+<style lang="scss" scoped>
+.user-details {
+/** CSS GOES HERE **/
+}
+</style>
+```
+
+```js
+// store/modules/uer.js
+export default {
+  namespaced: true,
+  state: {
+    data: {},
+    // ...
+  },
+  getters: {
+    info({ data }) {
+      return data
+    },
+    //....
+  },
+  actions: {
+    //....
+  },
+  mutations: {
+    //...
+  }
+}
+```
+
+In the example above, a getter method was created to return user data stored in the state. In the meantime in the user details component, we are mapping the getter method to a computed property, with the same name.
+
+With this approach, the component code is cleaner and easier to read and update.
+
 ### Testing
 
 TODO
 
 ### Notes
 
-* Do not call a `mutation` **directly**. Always use an `action` to commit a mutation. Doing so will keep consistency throughout the application. Mutations **must be** synchronous, while actions can be asynchronous.
-* Don't access `state` directly, use `getters` instead. Getters allows to create custom functions, case needs to retrieve a particular value.
-  * use `mapGetters` while creating component computed variables.
+TODO
 
