@@ -31,11 +31,16 @@ import mutations from './mutations'
 
 Vue.use(Vuex)
 
+export const initialState = () => ({
+  // root states goes here
+  // camelCase
+  variable1: value,
+  variable2: value,
+  //...
+})
+
 export default new Vuex.Store({
-  state: {
-    // root states goes here
-    // camelCase
-  },
+  state: initialState(),
   mutations,
   actions,
   modules
@@ -60,31 +65,46 @@ export default moduleNames.reduce((result, current, index) => {
 
 ```
 
-### Modules: File Naming
+### Vuex Modules: File Naming
 
 * Be consice when naming a module, since the name will be the namespace of the module.
 * Module name should be `camelCase`
 * Keep it simple: use a single word to defined module.
   * Examples: `users.js`, `auth.hs`, `project.js`
 
-### Modules: Structure
+### Vuex Modules: Structure
 
 Suggested module code structure.
 
 ```js
+// store/modules/modulaA.js
+
+export const initialState = () => {
+  // camaelCase props
+  return {
+    variable1: value,
+    variable2: value,
+    variable3: value
+  }
+}
+
 export default {
   namespace: true, // always TRUE
-  state: {
-    // camelCase
-  },
+  state: initialState(),
   getters: {
     // camelCase
   },
   actions: {
     // camelCase
+    reset({ commit }) {
+      commit('reset')
+    }
   },
   mutations: {
     // camelCase
+    reset(state) {
+      Object.entries(initialState()).forEach(([k, v]) => state[k] = v)
+    }
   }
 }
 ```
@@ -92,10 +112,18 @@ export default {
 Alternatively, you can define properties as `const`, then just exporting the combined object.
 
 ```js
-// State object
-const state = {
-  //...
+// store/modules/modulaA.js
+export const initialState = () => {
+  // camaelCase props
+  return {
+    variable1: value,
+    variable2: value,
+    variable3: value
+  }
 }
+
+// State object
+const state = initialState()
 
 // Getter functions
 const getters = {
@@ -105,11 +133,16 @@ const getters = {
 // Actions
 const actions = {
   // ...
+  reset({ commit }) {
+    commit('reset')
+  }
 }
 
 // Mutations
 const mutations = {
-  // ...
+  reset(state) {
+    Object.entries(initialState()).forEach(([k, v]) => state[k] = v)
+  }
 }
 
 export default {
@@ -121,9 +154,14 @@ export default {
 }
 ```
 
+**Notes:**
+
+* Avoid mixing modules using the two structures mentioned above. It is recommended to choose one of the proposed convetions and follow only one. In this way it will facilitate reading and maintenance.
 * There is no real gain to create a mutations type file to export mutations names variables. It is better just define the name of the mutation in the vuex object.
 * Avoid using all caps to name methods, this can leave a trail of complex names to use. The `state` properties, `getters`, `actions` and `mutations` functions **must** be named using `camelCase`.
 * `mutations` methods **must be** synchronous, while `actions` methods can be asynchronous (https://vuex.vuejs.org/guide/mutations.html#mutations-must-be-synchronous)
+* All modules must contain a way to `reset` state.
+  * It is quite common to have a reset feature when you have user authentication in your application so that you can reset the store when the user logs out, for example.
 
 ```js
 // Vue Component
@@ -146,13 +184,45 @@ await this.$store.dispatch('module/someAction')
 // ...
 ```
 
+### Global module state reset
+
+Global Store should contain a method to reset the entire store. This is very useful if you need to wipe data stored.
+
+```js
+// store/actions.js
+import modules from './modules'
+
+export default {
+  // ...
+  reset({ commit }) {
+    commit('reset')
+    Object.keys(modules).forEach(m => commit(`${m}/reset`))
+  }
+  // ...
+}
+```
+
+```js
+// store/mutations.js
+import { initialState } from './index'
+
+export default {
+  // ...
+  reset(state) {
+    Object.entries(initialState()).forEach(([k, v]) => state[k] = v)
+  }
+  // ...
+}
+```
+
+**Note:** check `tests/vue2/vuex/default` project for further reference.
+
 ### Vuex in Components
 
 * Do not call a `mutation` **directly**. For every mutation, create a respective `action`, to commit a mutation. It will keep consistency throughout the application.
 * Using `mapState` is strongly disengouraged.
 * Don't access `state` directly, use `getters` instead. Getters allows to create custom functions, case needs to retrieve a particular value.
 * Use `mapGetters` to map state data to computed properties - https://vuex.vuejs.org/guide/getters.html
-
 
 ```html
 <template>
