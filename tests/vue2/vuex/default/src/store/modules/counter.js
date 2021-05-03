@@ -1,8 +1,12 @@
+import { resetStore } from "../helpers"
+
+export const initialState = () => ({
+  value: 0
+})
+
 export default {
   namespaced: true, // mandatory
-  state: {
-    value: 0
-  },
+  state: initialState(),
   getters: {
     value({ value }) {
       return value
@@ -14,6 +18,9 @@ export default {
     },
     remove({ commit }) {
       commit('decrease')
+    },
+    reset({ commit }) {
+      commit('reset')
     }
   },
   mutations: {
@@ -22,6 +29,9 @@ export default {
     },
     decrease(state) {
       state.value--
+    },
+    reset(state) {
+      resetStore(state, initialState())
     }
   }
 }

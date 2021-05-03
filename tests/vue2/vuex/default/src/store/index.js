@@ -7,12 +7,13 @@ import mutations from './mutations'
 
 Vue.use(Vuex)
 
-console.log(modules)
+export const initialState = () => ({
+  variable1: '',
+  isLoading: false
+})
 
 export default new Vuex.Store({
-  state: {
-    isLoading: false
-  },
+  state: initialState(),
   getters,
   mutations,
   actions,
