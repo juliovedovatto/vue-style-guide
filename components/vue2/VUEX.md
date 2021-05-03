@@ -69,8 +69,9 @@ export default moduleNames.reduce((result, current, index) => {
 
 ### Modules: Structure
 
+Suggested module code structure.
+
 ```js
-// Pascal
 export default {
   namespace: true, // always TRUE
   state: {
@@ -88,11 +89,66 @@ export default {
 }
 ```
 
-**Important Note:** `mutations` methods **must be** synchronous, while `actions` methods can be asynchronous.
+Alternatively, you can define properties as `const`, then just exporting the combined object.
+
+```js
+// State object
+const state = {
+  //...
+}
+
+// Getter functions
+const getters = {
+  // ...
+}
+
+// Actions
+const actions = {
+  // ...
+}
+
+// Mutations
+const mutations = {
+  // ...
+}
+
+export default {
+    namespaced: true,  // always TRUE
+    state,
+    getters,
+    actions,
+    mutations
+}
+```
+
+* There is no real gain to create a mutations type file to export mutations names variables. It is better just define the name of the mutation in the vuex object.
+* Avoid using all caps to name methods, this can leave a trail of complex names to use. The `state` properties, `getters`, `actions` and `mutations` functions **must** be named using `camelCase`.
+* `mutations` methods **must be** synchronous, while `actions` methods can be asynchronous (https://vuex.vuejs.org/guide/mutations.html#mutations-must-be-synchronous)
+
+```js
+// Vue Component
+
+// BAD
+// ...
+import { MODULE_ACTION_NAME } from '@/store/mutation-types.js'
+
+// MODULE_ACTION_NAME => module/SOME_ACTION
+
+// ...
+await this.$store.dispatch(MODULE_ACTION_NAME)
+```
+
+```js
+// Vue Component
+// ...
+// GOOD
+await this.$store.dispatch('module/someAction')
+// ...
+```
 
 ### Vuex in Components
 
-* Do not call a `mutation` **directly**. Always create an `action`, to commit a mutation. It will keep consistency throughout the application.
+* Do not call a `mutation` **directly**. For every mutation, create a respective `action`, to commit a mutation. It will keep consistency throughout the application.
 * Using `mapState` is strongly disengouraged.
 * Don't access `state` directly, use `getters` instead. Getters allows to create custom functions, case needs to retrieve a particular value.
 * Use `mapGetters` to map state data to computed properties - https://vuex.vuejs.org/guide/getters.html
