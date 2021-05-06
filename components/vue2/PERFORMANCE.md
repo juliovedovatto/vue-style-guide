@@ -1,4 +1,4 @@
-# Performance
+# Performance (WIP)
 
 ## Routing (vue-router)
 
@@ -70,4 +70,6 @@ export default {
 }
 ```
 
+## NOTES
 
+TODO
