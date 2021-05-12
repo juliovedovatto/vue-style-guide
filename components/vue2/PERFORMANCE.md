@@ -173,9 +173,7 @@ export function nestedSort(items, options = { key: 'order', type: 'asc' }) {
 ```
 
 * When dealing with larger objects, avoid using watcher `deep` property. Using `deep` watchers can be expensive if they’re watching a large data structure. They need to register a dependency against everything in the data structure, which can take time. Case you need to watch deep objects, you can use `Proxy` or `observable-slim` package.
-* Restricting reactivity using `Object.freeze`. By default, Vue recursively observes every object property and this task can be memory-consuming. When dealing with Store, this can be useful.
-
-<script src="https://gist.github.com/Kasheftin/64723fb1e5cf32c332ef4e50c5eafebd.js"></script>
+* Restricting reactivity using `Object.freeze`. By default, Vue recursively observes every object property and this task can be memory-consuming. When dealing with Store, this can be useful. Check this [example](https://gist.github.com/Kasheftin/64723fb1e5cf32c332ef4e50c5eafebd#file-vue-performance-04-js).
 
 * Vuex: avoid using Functional Getters. Functional Getters are not cached and will run same function everytime it is called. Give preference to use basic getters, then work logic in the component/function.
 
